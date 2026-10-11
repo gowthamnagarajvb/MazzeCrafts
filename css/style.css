@@ -1,0 +1,514 @@
+/* ==========================================================================
+   Base & Reset
+   ========================================================================== */
+:root {
+  /* Colors */
+  --bg-color: #050505;
+  --panel-bg: #0a0a0a;
+  --text-primary: #ffffff;
+  --text-secondary: #aaaaaa;
+  
+  /* ArchSan Accent Color */
+  --accent-gold: #c6a47e; 
+  
+  /* Grid lines */
+  --grid-line: rgba(255, 255, 255, 0.05);
+  
+  /* Typography */
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Oswald', system-ui, -apple-system, sans-serif;
+  
+  /* Utilities */
+  --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  
+  color-scheme: dark;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+section {
+  padding: 120px 0;
+  position: relative;
+}
+
+/* ==========================================================================
+   Background Grid Lines
+   ========================================================================== */
+.lines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.line {
+  width: 1px;
+  height: 100%;
+  background: var(--grid-line);
+}
+
+/* ==========================================================================
+   Header (Logo & Menu Icon)
+   ========================================================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+
+.logo img {
+  height: 35px;
+}
+
+.menu-trigger {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  cursor: pointer;
+  z-index: 1000;
+  background: transparent;
+  border: none;
+}
+
+.menu-trigger span {
+  display: block;
+  width: 30px;
+  height: 1px;
+  background-color: var(--text-primary);
+  margin-bottom: 8px;
+  transition: var(--transition);
+}
+
+.menu-trigger span:last-child {
+  margin-bottom: 0;
+  width: 20px;
+}
+
+.menu-trigger:hover span {
+  width: 30px;
+  background-color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   Sidebar Navigation Panel
+   ========================================================================== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 350px;
+  height: 100vh;
+  background-color: var(--panel-bg);
+  border-left: 1px solid var(--grid-line);
+  z-index: 200;
+  padding: 100px 50px;
+  transition: right 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.active {
+  right: 0;
+}
+
+.sidebar-close {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  font-size: 24px;
+  color: var(--accent-gold);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-weight: 300;
+  transition: var(--transition);
+}
+
+.sidebar-close:hover {
+  transform: rotate(90deg);
+}
+
+.nav-menu {
+  list-style: none;
+  margin-top: 50px;
+}
+
+.nav-menu li {
+  margin-bottom: 25px;
+}
+
+.nav-menu a {
+  font-family: var(--font-heading);
+  color: var(--text-secondary);
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu a i {
+  margin-left: 5px;
+  font-size: 10px;
+  opacity: 0.5;
+}
+
+.nav-menu a:hover, .nav-menu a.active {
+  color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   Hero Layout
+   ========================================================================== */
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1600607687959-ce8a6c25118c?auto=format&fit=crop&q=80&w=2000');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 100%);
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  padding-left: 10vw;
+  max-width: 800px;
+}
+
+.section-subtitle,
+.hero-subtitle {
+  font-family: var(--font-primary);
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.section-subtitle::before,
+.hero-subtitle::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background-color: var(--accent-gold);
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.hero-content h1 {
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 1;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+.hero-content p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 550px;
+  margin-bottom: 40px;
+}
+
+/* ==========================================================================
+   Pill Button
+   ========================================================================== */
+.btn-pill {
+  display: inline-block;
+  padding: 14px 40px;
+  font-family: var(--font-primary);
+  font-size: 13px;
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 40px;
+  transition: var(--transition);
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-pill:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+/* ==========================================================================
+   Slider Controls
+   ========================================================================== */
+.slider-controls {
+  position: absolute;
+  bottom: 50px;
+  left: 10vw;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-primary);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.slider-controls .line-separator {
+  width: 60px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 15px;
+}
+
+/* ==========================================================================
+   About Section
+   ========================================================================== */
+.about {
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-text h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.2;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+.about-text p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+/* ==========================================================================
+   Services Section
+   ========================================================================== */
+.services {
+  background-color: var(--panel-bg);
+  padding-left: 10vw;
+  padding-right: 10vw;
+  border-top: 1px solid var(--grid-line);
+  border-bottom: 1px solid var(--grid-line);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.service-card {
+  padding: 40px 0;
+  border-top: 1px solid var(--grid-line);
+  transition: var(--transition);
+}
+
+.service-card:hover {
+  border-top-color: var(--accent-gold);
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--accent-gold);
+}
+
+.service-card p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   Projects Gallery
+   ========================================================================== */
+.projects {
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 50px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.project-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-item img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.project-item:hover img {
+  transform: scale(1.05);
+}
+
+.project-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+}
+
+.project-info span {
+  font-family: var(--font-primary);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+}
+
+.project-info h3 {
+  font-size: 1.8rem;
+  margin-top: 5px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+  padding: 80px 10vw 40px;
+  background-color: var(--panel-bg);
+  border-top: 1px solid var(--grid-line);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 50px;
+  margin-bottom: 60px;
+}
+
+.footer-col h4 {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  color: var(--accent-gold);
+}
+
+.footer-col p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.footer-col a {
+  color: var(--text-secondary);
+  font-size: 14px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.footer-col a:hover {
+  color: var(--accent-gold);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--grid-line);
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-bottom p {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .project-grid, .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
